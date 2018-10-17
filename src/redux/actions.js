@@ -23,3 +23,36 @@ export const fetchPosts = () => dispatch => {
     }
   })
 }
+
+export const addPost = (formData) => dispatch => {
+  console.log("adding post")
+  fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: formData.title,
+      body: formData.body,
+      userId: 1
+    }),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
+  })
+  .then(res => {
+    if(res.ok) {
+      return res.json()
+    }
+    else {
+      return false
+    }
+  })
+  .then(data => {
+    if(data) {
+      console.log("New post added: ", data)
+
+      dispatch({
+        type: 'ADD_POST',
+        payload: data
+      })
+    }
+  })
+}

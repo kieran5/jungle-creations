@@ -18,9 +18,12 @@ class Posts extends Component {
         ))
 
         return (
-            <div className="grid-container">
-                {posts}
+            <div>
+              <h3>Posts</h3>
 
+              <div className="grid-container">
+                  {posts}
+              </div>
             </div>
         );
     }
