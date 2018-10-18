@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../redux/actions'
+import { fetchPosts, deletePost } from '../redux/actions'
 import './Posts.css'
 
 class Posts extends Component {
+    handleDeletePost(id) {
+      console.log("Post ID to be deleted: " + id)
+
+      this.props.deletePost(id)
+
+    }
+
     componentWillMount() {
       this.props.fetchPosts()
     }
@@ -14,6 +21,8 @@ class Posts extends Component {
           <div className="grid-item" key={post.id}>
             <h4 className="postTitle" style={{fontSize: "16px"}}>{post.title}</h4>
             <p className="postBody" style={{fontSize: "10px"}}>{post.body}</p>
+            <button>Edit</button>
+            <button onClick={() => this.handleDeletePost(post.id)}>Delete</button>
           </div>
         ))
 
@@ -40,4 +49,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchPosts })(Posts);
+export default connect(mapStateToProps, { fetchPosts, deletePost })(Posts);

@@ -19,6 +19,13 @@ export default function(state = initialState, action) {
         posts: state.posts.concat([action.payload])
       }
 
+    case 'DELETE_POST':
+      console.log("reducer - delete hit")
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.id !== action.id)
+      }
+
     default:
       return state;
   }

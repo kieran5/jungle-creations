@@ -56,3 +56,18 @@ export const addPost = (formData) => dispatch => {
     }
   })
 }
+
+export const deletePost = (id) => dispatch => {
+  fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    method: 'DELETE'
+  })
+  .then(res => {
+    if(res.ok) {
+      dispatch({
+        type: 'DELETE_POST',
+        id: id
+      })
+    }
+  })
+
+}
