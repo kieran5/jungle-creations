@@ -12,7 +12,8 @@ class AddPost extends Component {
       const body = this.getBody.value;
       const data = {
         title,
-        body
+        body,
+        editing: false
       }
 
       console.log("submitted data", data)

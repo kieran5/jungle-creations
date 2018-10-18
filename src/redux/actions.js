@@ -71,3 +71,36 @@ export const deletePost = (id) => dispatch => {
   })
 
 }
+
+export const editPost = (id) => dispatch => {
+  dispatch({
+    type: 'EDIT_POST',
+    id: id
+  })
+}
+
+export const updatePost = (id, formData) => dispatch => {
+  fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      id: id,
+      title: formData.newTitle,
+      body: formData.newBody,
+      userId: 1
+    }),
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data) {
+      console.log("Updated post: ", data)
+
+      dispatch({
+        type: 'UPDATE_POST',
+        payload: data
+      })
+    }
+  })
+}
